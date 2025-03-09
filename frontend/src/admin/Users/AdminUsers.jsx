@@ -32,7 +32,7 @@ const AdminUsers = ({ user }) => {
   }, []);
 
   const updateRole = async (id) => {
-    if (confirm("are you sure you want to update this user role")) {
+    if (confirm("Are you sure you want to update this user role?")) {
       try {
         const { data } = await axios.put(
           `${server}/api/user/${id}`,
@@ -52,26 +52,25 @@ const AdminUsers = ({ user }) => {
     }
   };
 
-  console.log(users);
   return (
     <Layout>
       <div className="users">
         <h1>All Users</h1>
-        <table border={"black"}>
-          <thead>
+        <table className="table table-bordered table-striped table-hover
+        ">
+          <thead className="table-dark">
             <tr>
-              <td>#</td>
-              <td>name</td>
-              <td>email</td>
-              <td>role</td>
-              <td>update role</td>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Update Role</th>
             </tr>
           </thead>
-
-          {users &&
-            users.map((e, i) => (
-              <tbody>
-                <tr>
+          <tbody>
+            {users &&
+              users.map((e, i) => (
+                <tr key={e._id}>
                   <td>{i + 1}</td>
                   <td>{e.name}</td>
                   <td>{e.email}</td>
@@ -79,14 +78,14 @@ const AdminUsers = ({ user }) => {
                   <td>
                     <button
                       onClick={() => updateRole(e._id)}
-                      className="common-btn"
+                      className="btn btn-primary btn-sm"
                     >
                       Update Role
                     </button>
                   </td>
                 </tr>
-              </tbody>
-            ))}
+              ))}
+          </tbody>
         </table>
       </div>
     </Layout>
